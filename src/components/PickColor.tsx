@@ -1,41 +1,16 @@
 import React, { useState } from "react";
 import { type Color, type resizeAction, Size } from "../lib/types.ts";
 import Button, { ResizeButton } from "./Button.tsx";
-export default function PeekColor() {
+export default function PickColor() {
+  //state for picked color
   const [color, setColor] = useState<Color>("white");
+  //arrays for the button's options
   let colorOptions: Color[] = ["blue", "green", "red"];
-
+  const actions: resizeAction[] = ["+", "-"];
+  //states for the squre's heghit & width
   const [squereHeight, setSquereHeight] = useState<number>(1);
   const [squereWidth, setSquereWidth] = useState<number>(1);
 
-  function getSizeByNumber(num: number): Size {
-    switch (num) {
-      case 1:
-        return Size.small;
-      case 2:
-        return Size.medium;
-      case 3:
-        return Size.large;
-      case 4:
-        return Size.xlarge;
-      default:
-        return Size.small;
-    }
-  }
-
-  function getDivDetails(
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ): void {
-    genericLog(event.currentTarget.style.backgroundColor);
-    genericLog(event.currentTarget.style.height);
-    genericLog(event.currentTarget.style.width);
-  }
-
-  function genericLog<T>(element: T): void {
-    console.log("generic log: ", element);
-  }
-  const actions: resizeAction[] = ["+", "-"];
-  // const side : string[]  = ["height","width"];
   return (
     <div className="PeekColor">
       <h1>PeekColor</h1>
@@ -77,4 +52,32 @@ export default function PeekColor() {
       </div>
     </div>
   );
+}
+
+//the function takes a number between 1-4 & returns the Size value
+function getSizeByNumber(num: number): Size {
+  switch (num) {
+    case 1:
+      return Size.small;
+    case 2:
+      return Size.medium;
+    case 3:
+      return Size.large;
+    case 4:
+      return Size.xlarge;
+    default:
+      return Size.small;
+  }
+}
+//just a generic log function
+function genericLog<T>(element: T): void {
+  console.log("generic log: ", element);
+}
+//a functin that passed & gets the event
+function getDivDetails(
+  event: React.MouseEvent<HTMLDivElement, MouseEvent>
+): void {
+  genericLog(event.currentTarget.style.backgroundColor);
+  genericLog(event.currentTarget.style.height);
+  genericLog(event.currentTarget.style.width);
 }

@@ -1,17 +1,6 @@
 import React, { useEffect, useState } from "react";
-
+import { Currency, coins } from "../lib/types";
 function CurrencyConverter() {
-  enum Currency {
-    USD = "USD",
-    EUR = "EUR",
-    NIS = "NIS",
-  }
-  const coins: Record<string, number> = {
-    [Currency.USD]: 3.5,
-    [Currency.NIS]: 1,
-    [Currency.EUR]: 4.5,
-  };
-
   const [amount, setAmount] = useState<number>(0);
   const [currentCurrency, setCurrentCurrency] = useState<Currency>(
     Currency.NIS
