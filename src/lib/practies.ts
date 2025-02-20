@@ -46,3 +46,37 @@ const fullNameOmit: Omit<Student, "class"> = {
   firstName: "Beni",
   lastName: "Lahav",
 };
+
+const Status = {
+  notStarted: "notStarted",
+  inProgress: "inProgress",
+  completed: "completed",
+} as const;
+
+type Status = keyof typeof Status;
+
+// type Setters = {
+//   [K in keyof typeof Status]: (value: Status) => void;
+// };
+
+function initialize(status: Status) {}
+
+initialize(Status.notStarted); // the output is notStarted as a string
+initialize("completed"); // the output is completed as a string
+initialize(Status["notStarted"]); // the output is notStarted as a string
+
+type Product = {
+  name: string;
+  price: number;
+  inStock: boolean;
+};
+type ProductSetters = {
+  [K in keyof Product as `Set${Capitalize<K>}`]: (value: Product[K]) => void;
+};
+
+const setters: ProductSetters = {
+  SetName(name: string) {},
+  SetPrice(price: number) {},
+
+  SetInStock(inStock: boolean) {},
+};

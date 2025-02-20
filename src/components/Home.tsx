@@ -5,9 +5,9 @@ import GussTheNumber from "./GussTheNumber.tsx";
 function Home() {
   return (
     <div>
-      {/* <PickColor />
-      <CurrencyConverter /> */}
-      <GussTheNumber />
+      {/* <PickColor /> */}
+      {/* <CurrencyConverter /> */}
+      {/* <GussTheNumber /> */}
     </div>
   );
 }

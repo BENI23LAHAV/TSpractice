@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { type Color, type resizeAction, Size } from "../lib/types.ts";
+import React, { use, useEffect, useState } from "react";
+import { type Color, type resizeAction, Shape, Size } from "../lib/types.ts";
 import Button, { ResizeButton } from "./Button.tsx";
 export default function PickColor() {
   //state for picked color
@@ -10,6 +10,23 @@ export default function PickColor() {
   //states for the squre's heghit & width
   const [squereHeight, setSquereHeight] = useState<number>(1);
   const [squereWidth, setSquereWidth] = useState<number>(1);
+  //state for shape
+  const [shape, setShape] = useState<Shape>(Shape.square);
+  useEffect(() => {
+    console.log(shape);
+  }, [shape]);
+
+  const squereStyle = {
+    backgroundColor: color,
+    height: `${getSizeByNumber(squereHeight)}px`,
+    width: `${getSizeByNumber(squereWidth)}px`,
+  };
+  const circleStyle = {
+    backgroundColor: color,
+    height: `${getSizeByNumber(squereHeight)}px`,
+    width: `${getSizeByNumber(squereWidth)}px`,
+    borderRadius: "50%",
+  };
 
   return (
     <div className="PeekColor">
@@ -37,18 +54,22 @@ export default function PickColor() {
           key={index}
         />
       ))}
-
+      <br />
+      <label> Shape</label>
+      <select
+        onChange={(e) => {
+          setShapeState(e, setShape);
+        }}>
+        <option value="circle">Circle</option>
+        <option value="squere">Squere</option>
+      </select>
       <div
-        style={{
-          backgroundColor: color,
-          height: `${getSizeByNumber(squereHeight)}px`,
-          width: `${getSizeByNumber(squereWidth)}px`,
-        }}
+        style={shape === "circle" ? circleStyle : squereStyle}
         onClick={getDivDetails}>
-        <p>
+        {/* <p>
           im squere in color {color} heghit {getSizeByNumber(squereHeight)} and
           width {getSizeByNumber(squereWidth)}
-        </p>
+        </p> */}
       </div>
     </div>
   );
@@ -80,4 +101,14 @@ function getDivDetails(
   genericLog(event.currentTarget.style.backgroundColor);
   genericLog(event.currentTarget.style.height);
   genericLog(event.currentTarget.style.width);
+}
+function setShapeState(
+  event: React.ChangeEvent<HTMLSelectElement>,
+  setState: React.Dispatch<React.SetStateAction<Shape>>
+): void {
+  if (Shape[event.currentTarget.value]) {
+    setState(event.currentTarget.value as Shape);
+  } else {
+    setState(Shape.square);
+  }
 }
