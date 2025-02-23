@@ -33,4 +33,26 @@ const coins: Record<string, number> = {
   [Currency.EUR]: 4.5,
 };
 
-export { Color, resizeAction, Shape, Size, GameStatus, Currency, coins };
+type CurrencyData = { [key: string]: string };
+
+interface Rates {
+  [key: string]: number;
+}
+
+interface ExchangeRatesResponse {
+  date: string;
+  current: Rates;
+}
+
+export {
+  Color,
+  resizeAction,
+  Shape,
+  Size,
+  GameStatus,
+  Currency,
+  coins,
+  CurrencyData,
+  Rates,
+  ExchangeRatesResponse,
+};

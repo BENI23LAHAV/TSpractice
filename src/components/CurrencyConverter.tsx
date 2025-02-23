@@ -11,13 +11,13 @@ function CurrencyConverter() {
   const [resulst, setResults] = useState<number>(0);
 
   useEffect(() => {
-    const currentAmount: number = coins[currentCurrency] * amount;
+    const currentAmount: number = coins[currentCurrency] * amount; //המטבע הנבחר כפול הכמות
     console.log("currentAmount: ", currentAmount);
 
-    const prefered: number = coins[preferredCurrency];
+    const prefered: number = coins[preferredCurrency]; //המטבע הרצוי להמרה אליו
     console.log("prefered: ", preferredCurrency);
 
-    setResults(currentAmount / prefered);
+    setResults(currentAmount / prefered); //חלוקה של המטבע הנבחר על המטבע הרצויA
   }, [amount, preferredCurrency, currentCurrency]);
 
   function getAndSetAmount(event: React.ChangeEvent<HTMLInputElement>): void {
